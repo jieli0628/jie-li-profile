@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Jie Li - Professional Profile</title>
+<style>
+  :root {
+    --primary: #1a5276;
+    --primary-light: #2e86c1;
+    --accent: #c8a415;
+    --dark: #1c2833;
+    --gray: #5d6d7e;
+    --light-bg: #f4f6f7;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--dark);
+    background: var(--light-bg);
+    line-height: 1.6;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+    color: var(--white);
+    padding: 48px 24px 40px;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 132px; height: 132px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 46px; font-weight: 700; color: var(--primary);
+    border: 4px solid rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+  .header-text h1 { font-size: 32px; font-weight: 700; letter-spacing: 0.5px; }
+  .header-text .title { font-size: 17px; margin-top: 6px; color: #d6eaf8; font-weight: 500;}
+  .header-text .affil { font-size: 15px; margin-top: 4px; color: #aed6f1; }
+  .header-text .contact { margin-top: 12px; display: flex; gap: 18px; flex-wrap: wrap; }
+  .header-text .contact a {
+    color: var(--white); text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 6px 14px; border-radius: 20px; font-size: 13px;
+    transition: all .2s;
+  }
+  .header-text .contact a:hover { background: rgba(255,255,255,0.15); }
+
+  /* Nav */
+  nav {
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 4px; overflow-x: auto;
+  }
+  .nav-inner a {
+    padding: 14px 18px;
+    color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 600;
+    white-space: nowrap; border-bottom: 3px solid transparent;
+    transition: all .2s;
+  }
+  .nav-inner a:hover, .nav-inner a.active {
+    color: var(--primary); border-bottom-color: var(--primary);
+  }
+
+  /* Main content */
+  main { max-width: 900px; margin: 0 auto; padding: 40px 24px 64px; }
+  section { margin-bottom: 48px; }
+  h2 {
+    font-size: 22px; color: var(--primary);
+    padding-bottom: 10px; margin-bottom: 22px;
+    border-bottom: 2px solid #e5e8e8;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h2 .num {
+    font-size: 13px; color: var(--white); background: var(--primary);
+    width: 26px; height: 26px; border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  p.lead { font-size: 15.5px; color: #2c3e50; margin-bottom: 18px; }
+  .meta-list { list-style: none; }
+  .meta-list li {
+    padding: 11px 0; border-bottom: 1px solid #eee;
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .meta-list li:last-child { border-bottom: none; }
+  .meta-list .year {
+    font-weight: 700; color: var(--primary-light);
+    min-width: 110px; font-size: 14px;
+  }
+  .meta-list .content { font-size: 15px; }
+  .meta-list .content b { color: var(--dark); }
+  .meta-list .content span { color: var(--gray); font-size: 13.5px; display: block; margin-top: 2px; }
+
+  /* Stat cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px; margin: 24px 0;
+  }
+  .stat-card {
+    background: var(--white); border-radius: 10px;
+    padding: 22px 18px; text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--primary-light);
+  }
+  .stat-card .num {
+    font-size: 30px; font-weight: 700; color: var(--primary);
+    line-height: 1.2;
+  }
+  .stat-card .num small { font-size: 15px; font-weight: 600; color: var(--gray); }
+  .stat-card .label { font-size: 13px; color: var(--gray); margin-top: 6px; }
+
+  /* Highlight box */
+  .highlight-box {
+    background: var(--white);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 18px 0;
+  }
+  .highlight-box b { color: var(--primary); }
+  .highlight-box ul { margin: 10px 0 0 20px; }
+  .highlight-box li { margin-bottom: 8px; font-size: 14.5px; }
+
+  /* Publications */
+  .pub-list { list-style: none; }
+  .pub-list li {
+    padding: 16px 0; border-bottom: 1px solid #e8eaeb;
+  }
+  .pub-list li:last-child { border-bottom: none; }
+  .pub-list .pub-title { font-size: 15.5px; font-weight: 600; color: var(--primary); text-decoration: none; display: block; margin-bottom: 4px; }
+  .pub-list .pub-title:hover { text-decoration: underline; }
+  .pub-list .pub-meta { font-size: 13.5px; color: var(--gray); }
+  .pub-list .pub-meta .cites { color: var(--accent); font-weight: 600; margin-left: 8px; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px; margin-right: 8px;
+    vertical-align: middle;
+  }
+  .badge-top { background: #fdebd0; color: #9c640c; }
+  .badge-star { background: #eaf2f8; color: #21618c; }
+  .badge-std { background: #e8f8f5; color: #148f77; }
+
+  /* Expertise tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .tag {
+    background: var(--white); border: 1px solid var(--primary-light);
+    color: var(--primary); padding: 7px 16px; border-radius: 20px;
+    font-size: 13.5px; font-weight: 500;
+  }
+
+  /* WG relevance */
+  .wg-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media (max-width: 640px) { .wg-grid { grid-template-columns: 1fr; } }
+  .wg-card {
+    background: var(--white); border-radius: 10px; padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .wg-card h3 { font-size: 15px; color: var(--primary); margin-bottom: 10px; }
+  .wg-card p { font-size: 13.5px; color: #34495e; }
+  .wg-card .val { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+
+  /* Footer */
+  footer {
+    background: var(--dark); color: #85929e;
+    text-align: center; padding: 28px 24px; font-size: 13px;
+  }
+  footer a { color: #aed6f1; text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .header-inner { text-align: center; justify-content: center; }
+    .header-text .contact { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="avatar">JL</div>
+    <div class="header-text">
+      <h1>Dr. Jie Li &nbsp;<span style="font-size:18px; font-weight:400;">李杰</span></h1>
+      <div class="title">Head of Speech Technology R&amp;D Center &nbsp;·&nbsp; Technical Lead, Xing-Audio Foundation Model</div>
+      <div class="affil">Xingchen AGI Lab, China Telecom Artificial Intelligence Technology Co. Ltd &nbsp;·&nbsp; Beijing, China</div>
+      <div class="contact">
+        <a href="https://scholar.google.com/citations?user=Bb9AKusAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="mailto:lij86@chinatelecom.cn">lij86@chinatelecom.cn</a>
+        <a href="#publications">Selected Publications</a>
+        <a href="#opencompute">Open Compute Governance</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#profile">Profile</a>
+    <a href="#experience">Experience</a>
+    <a href="#highlights">Key Achievements</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#publications">Publications</a>
+    <a href="#standards">Standards</a>
+    <a href="#opencompute">Open Compute &amp; Governance</a>
+    <a href="#availability">Languages &amp; Capacity</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="profile">
+  <h2><span class="num">01</span> Professional Profile</h2>
+  <p class="lead">
+    Dr. Jie Li is a speech AI researcher and engineering leader with over 15 years of experience in
+    automatic speech recognition (ASR), speech synthesis (TTS), and spoken-language large models.
+    He currently leads the Speech Technology R&amp;D Center at Xingchen AGI Lab, China Telecom Artificial
+    Intelligence Technology Co. Ltd, where he serves as technical lead of the <b>Xing-Audio Foundation
+    Model</b> — a fully self-developed speech intelligence stack serving nearly <b>500 million API calls per
+    month</b> across national telecommunications, public services, and consumer products.
+  </p>
+  <p class="lead">
+    Beyond algorithm research, his work is fundamentally about <b>operating AI infrastructure at scale</b>:
+    maintaining production AI services under rigorous real-time-factor (RTF) and availability targets,
+    orchestrating multi-instance deployments across domestic AI chips (Huawei Ascend, Denglin, Moore
+    Threads), and delivering both public-cloud and private (on-premise) deployments in which customer
+    data and models remain under customer control.
+  </p>
+  <p class="lead">
+    His work centers on making advanced speech intelligence <b>accessible in every Chinese language variety</b> —
+    including 60+ regional dialects and low-resource minority languages such as Uyghur and Tibetan —
+    and on building sovereign, standards-based AI infrastructure. He is the principal drafter of China's
+    national AI standard for speech large models and leads national-level research programs on
+    multimodal foundation models.
+  </p>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">15<small>+</small></div><div class="label">Years in AI &amp; Speech</div></div>
+    <div class="stat-card"><div class="num">~500<small>M</small></div><div class="label">Monthly API Calls Served</div></div>
+    <div class="stat-card"><div class="num">60<small>+</small></div><div class="label">Dialects Supported</div></div>
+    <div class="stat-card"><div class="num">61<small>+</small></div><div class="label">Peer-Reviewed Papers</div></div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2><span class="num">02</span> Professional Experience</h2>
+  <ul class="meta-list">
+    <li>
+      <span class="year">2022 – Present</span>
+      <span class="content">
+        <b>Head of Speech Technology R&amp;D Center</b>, Xingchen AGI Lab, China Telecom Artificial Intelligence Technology Co. Ltd
+        <span>Technical lead of the Xing-Audio Foundation Model; directing a 38-member research team covering ASR, TTS, spoken dialogue, and speech LLMs. Managing national research programs and industry-scale deployment.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2017 – 2022</span>
+      <span class="content">
+        <b>ASR Team Lead</b>, Kuaishou Technology (Multimodal Content Understanding Department)
+        <span>Led speech recognition R&amp;D for one of the world's largest short-video platforms (hundreds of millions of daily active users).</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2016 – 2017</span>
+      <span class="content">
+        <b>Speech Algorithm Researcher</b>, Microsoft (Asia Internet Engineering Institute)
+        <span>Speech recognition algorithm research for large-scale Chinese voice services.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2011 – 2016</span>
+      <span class="content">
+        <b>Ph.D. in Computer Science / Pattern Recognition</b>, Institute of Automation, Chinese Academy of Sciences (CASIA)
+        <span>Doctoral research on large-vocabulary continuous speech recognition (LVCSR) and deep neural networks, supervised by Prof. Bo Xu.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2007 – 2011</span>
+      <span class="content">
+        <b>B.E. in Automation</b>, Tianjin University
+      </span>
+    </li>
+  </ul>
+</section>
+
+<section id="highlights">
+  <h2><span class="num">03</span> Key Achievements</h2>
+
+  <div class="highlight-box">
+    <b>Xing-Audio Foundation Model — National Key Technology Program &amp; Industry Recognition</b>
+    <ul>
+      <li>Sub-project leader (dialect speech recognition) of a <b>SASAC major national research program</b> on multimodal foundation model technologies. In the January 2025 formal review led by Academician Liao Xiangke, the expert panel assessed the multi-dialect speech recognition capability as <b>"internationally leading"</b>.</li>
+      <li>Xing-Audio was selected as one of the <b>"Top 10 National Instruments of Central State-Owned Enterprises, 2025"</b> — an annual list recognizing the highest level of independent innovation among China's central SOEs.</li>
+      <li>First proposed the <b>BoSS (Beyond Semantic Speech) framework</b> and the L1–L5 capability grading for speech intelligence; pioneered a single-model architecture allowing free code-switching between Mandarin, English, and 60+ Chinese dialects — 2–6 months ahead of comparable public approaches (e.g., Kimi/MOSS-audio) in architectural design.</li>
+      <li>Champion of the <b>2026 ChinaVoices Challenge</b> (both tracks) for Chinese multi-dialect speech recognition; independent benchmarks by CAICT and CESI confirm multi-dialect accuracy ahead of major domestic competitors.</li>
+      <li>2024 China Telecom Group <b>Science &amp; Technology Progress Award (Second Class)</b> — first-ranked contributor.</li>
+      <li>Full-stack adaptation of the speech model across <b>domestic AI chips</b> (Huawei Ascend, Denglin, Moore Threads — 3 vendors, 5 chip models), building a fully sovereign inference platform.</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <b>Deployment at National Scale — Public-Service Value</b>
+    <ul>
+      <li>Nearly <b>500 million monthly API calls</b> across telecom and public-service products: China Telecom assistant services (&gt;200M calls/month), smart set-top boxes (&gt;180M calls/month, +23pp voice engagement), hotline navigation with hyper-natural TTS (71M calls/month, naturalness 4.0–4.1/5), and agent-assist systems handling ~9 million calls monthly for 10,000+ agent seats.</li>
+      <li>One of the few industry stacks with a <b>complete Uyghur &amp; Tibetan speech pipeline</b> (10+ products), deployed in Xinjiang, Tibet, and Qinghai — including Tibetan-TTS covering all three major Tibetan dialect regions.</li>
+      <li>Public-safety and civic deployments: anti-fraud hotline interventions (hang-up rate cut from 60% to 36%, with &lt;1% of callers suspecting an AI agent) and a Cantonese-language 12345 civic hotline (91% recognition accuracy vs. 78% for leading competitors).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="expertise">
+  <h2><span class="num">04</span> Areas of Expertise</h2>
+  <p class="lead">
+    Deep technical expertise spanning the full spoken-language AI stack, with particular strength at the
+    intersection of large models, low-resource languages, and production-grade deployment on sovereign infrastructure.
+  </p>
+  <div class="tags">
+    <span class="tag">AI Infrastructure Operations (RTF, SLA, Multi-instance Deployment)</span>
+    <span class="tag">Speech Large Language Models (Speech LLM)</span>
+    <span class="tag">Automatic Speech Recognition (ASR)</span>
+    <span class="tag">Text-to-Speech Synthesis (TTS)</span>
+    <span class="tag">Multi-dialect &amp; Low-resource Speech</span>
+    <span class="tag">Full-duplex Spoken Dialogue</span>
+    <span class="tag">Multimodal Foundation Models</span>
+    <span class="tag">AI Model Evaluation &amp; Benchmarking</span>
+    <span class="tag">National &amp; International AI Standards Development</span>
+    <span class="tag">Sovereign AI Infrastructure &amp; Domestic Chip Adaptation</span>
+    <span class="tag">Cross-border Data Protection in AI Service Delivery</span>
+  </div>
+</section>
+
+<section id="publications">
+  <h2><span class="num">05</span> Selected Publications</h2>
+  <p class="lead">
+    60+ peer-reviewed papers (incl. TPAMI, ICASSP, Interspeech, AAAI); 61 patents filed (16 granted).
+    Full list on <a href="https://scholar.google.com/citations?user=Bb9AKusAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+    Citations: 370 · h-index: 11 · i10-index: 11.
+  </p>
+  <ul class="pub-list">
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:eQOLeE2rZwMC" target="_blank" rel="noopener">The SpeechTransformer for Large-scale Mandarin Chinese Speech Recognition</a>
+      <span class="pub-meta">ICASSP 2019 <span class="cites">92 citations</span> — one of the earliest Transformer-based ASR systems deployed at scale in Mandarin</span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:LkGwnXOMwfcC" target="_blank" rel="noopener">BoSS: Beyond-Semantic Speech</a>
+      <span class="pub-meta">arXiv 2025 <span class="cites">8 citations</span> — defining the theoretical framework and L1–L5 capability grading for beyond-semantic speech intelligence</span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:0EnyYjriUFMC" target="_blank" rel="noopener">WenetSpeech-YUE: A Large-scale Cantonese Speech Corpus with Multi-dimensional Annotation</a>
+      <span class="pub-meta">AAAI 2026 <span class="cites">19 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:hqOjcs7Dif8C" target="_blank" rel="noopener">WenetSpeech-CHUAN: A Large-scale Sichuanese Corpus with Rich Annotation for Dialectal Speech Processing</a>
+      <span class="pub-meta">ICASSP 2026 <span class="cites">15 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:3fE2CSJIrl8C" target="_blank" rel="noopener">DBHN-Net: Dual-Branch Hybrid Neural Network for Low-Complexity Monaural Speech Enhancement</a>
+      <span class="pub-meta">IEEE TPAMI 2026 <span class="cites">4 citations</span> — flagship journal (IF 20.8)</span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:KlAtU1dfN6UC" target="_blank" rel="noopener">Audio-Cogito: Towards Deep Audio Reasoning in Large Audio Language Models</a>
+      <span class="pub-meta">arXiv 2026 <span class="cites">6 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:2osOgNQ5qMEC" target="_blank" rel="noopener">TeleSpeechPT: Large-scale Chinese Multi-dialect and Multi-accent Speech Pre-training</a>
+      <span class="pub-meta">NCMMSC 2024 <span class="cites">6 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:W7OEmFMy1HYC" target="_blank" rel="noopener">Speaker-aware Speech-Transformer</a>
+      <span class="pub-meta">ASRU 2019 <span class="cites">38 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:u5HHmVD_uO8C" target="_blank" rel="noopener">Towards End-to-End Speech Recognition for Chinese Mandarin Using LSTM-RNNs</a>
+      <span class="pub-meta">Interspeech 2015 <span class="cites">37 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:Se3iqnhoufwC" target="_blank" rel="noopener">DIFFA: Large Language Diffusion Models Can Listen and Understand</a>
+      <span class="pub-meta">AAAI 2026 <span class="cites">5 citations</span></span>
+    </li>
+    <li>
+      <a class="pub-title" href="https://scholar.google.com/citations?view_op=view_citation&user=Bb9AKusAAAAJ&citation_for_view=Bb9AKusAAAAJ:ufrVoPGSRksC" target="_blank" rel="noopener">Goat-SLM: A Spoken Language Model with Paralinguistic and Speaker Characteristic Awareness</a>
+      <span class="pub-meta">arXiv 2025 <span class="cites">5 citations</span></span>
+    </li>
+  </ul>
+</section>
+
+<section id="standards">
+  <h2><span class="num">06</span> Standards &amp; Policy Work</h2>
+  <ul class="meta-list">
+    <li>
+      <span class="year">2026</span>
+      <span class="content">
+        <b>Principal Drafter — National Standard</b>, "Artificial Intelligence — Large Models — Part 7: Speech Large Models" (GB/Z 45288.7-2026)
+        <span>Led drafting of China's first national guiding-technical-document standard for speech large models, covering capability grading, evaluation metrics, and governance requirements.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2024–2025</span>
+      <span class="content">
+        <b>Evaluator &amp; Benchmark Contributor</b>, CAICT (China Academy of Information and Communications Technology) &amp; CESI (China Electronics Standardization Institute)
+        <span>Contributed to national speech-model evaluation programs; Xing-Audio achieved leading results in multi-dialect recognition benchmarks against major domestic competitors.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2023–Present</span>
+      <span class="content">
+        <b>National Research Program Leadership</b>, SASAC major special project on multimodal foundation models
+        <span>Sub-project leader for dialect speech recognition; formal expert review (Jan 2025) assessed the capability as "internationally leading".</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">2024–2026</span>
+      <span class="content">
+        <b>Team Talent Development</b>, 2 members selected for the Beijing Youth Talent Support Program
+        <span>Building the AI speech talent pipeline — one of the core commitments of China Telecom's engineering leadership development program.</span>
+      </span>
+    </li>
+  </ul>
+</section>
+
+<section id="opencompute">
+  <h2><span class="num">07</span> Relevance to Open Compute Governance</h2>
+  <p class="lead">
+    Dr. Li's perspective on open compute is grounded in the day-to-day reality of operating sovereign, standards-based
+    AI infrastructure at national scale — and in extending such capability to underserved language communities.
+    His experience maps directly onto the Working Group's core questions:
+  </p>
+  <div class="wg-grid">
+    <div class="wg-card">
+      <span class="val">Operational perspective (Q13 · Compute provision and operations)</span>
+      <h3>Production AI at national scale</h3>
+      <p>Operates a production AI platform serving ~500M monthly calls under rigorous service-level discipline (RTF monitoring, multi-instance deployment, high-availability engineering) — the <b>"implementer's view"</b> the ToR explicitly seeks: what governance commitments are actually feasible for operators acting within their own legal and commercial environments.</p>
+    </div>
+    <div class="wg-card">
+      <span class="val">Data &amp; model protection (TF1 · Data immunity and control)</span>
+      <h3>Confidentiality in practice</h3>
+      <p>Manages speech pipelines handling sensitive user voice data for telecom and public-sector clients, including <b>private (on-premise) deployments</b> where customer data and models must remain entirely under customer control. Direct operational experience with the confidentiality, integrity and residency questions at the heart of the data immunity protocol.</p>
+    </div>
+    <div class="wg-card">
+      <span class="val">Interoperability (TF5 · Technical interoperability)</span>
+      <h3>Standards-based portability</h3>
+      <p>As principal drafter of the national speech-LLM standard (GB/Z 45288.7), works on exactly the kind of <b>interfaces, metadata and assurance artefacts</b> that make workloads, models and results portable across facilities without lock-in — the core concern of TF5, applied to the AI-model layer of the compute stack.</p>
+    </div>
+    <div class="wg-card">
+      <span class="val">Global South relevance (TF4 · Sustainability and enablement)</span>
+      <h3>Digital inclusion through technology</h3>
+      <p>Long-standing practice bringing advanced AI to <b>low-resource language communities</b> (Uyghur, Tibetan, 60+ dialects) in western China — first-hand understanding of how compute, models and skills reach regions without their own AI infrastructure, and how talent development sustains that reach over time.</p>
+    </div>
+  </div>
+</section>
+
+<section id="availability">
+  <h2><span class="num">08</span> Languages, Capacity &amp; Declaration</h2>
+  <ul class="meta-list">
+    <li>
+      <span class="year">Working languages</span>
+      <span class="content">
+        <b>English</b> (professional working proficiency — technical reading, written drafting, and meeting participation) · <b>Chinese</b> (native)
+        <span>Comfortable with written deliverable drafting, remote meeting participation, and asynchronous collaboration across time zones (UTC+8).</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">UN languages</span>
+      <span class="content">
+        <b>Chinese</b> and <b>English</b>
+        <span>Able to process submissions to the open consultation in Chinese in addition to English-language working sessions.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">Time commitment</span>
+      <span class="content">
+        <b>Available for the full cycle through May 2027</b>
+        <span>Able to commit to monthly plenary sessions, fortnightly task force meetings (weekly during drafting periods), and the three deliverable cycles — all held virtually.</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">Declaration of interests</span>
+      <span class="content">
+        <b>Employer affiliation</b>: China Telecom Artificial Intelligence Technology Co. Ltd — a state-owned enterprise operating commercial cloud, compute and AI services.
+        <span>Prepared to file a full declaration of interests upon appointment and to recuse from any specific provision in whose outcome the employer holds a direct commercial interest. Committed to serving in a personal capacity as an expert, without instruction on the substance of the work from any government, employer or organization.</span>
+      </span>
+    </li>
+  </ul>
+</section>
+
+<section id="contact">
+  <h2><span class="num">09</span> Contact</h2>
+  <ul class="meta-list">
+    <li>
+      <span class="year">Affiliation</span>
+      <span class="content">
+        Speech Technology R&amp;D Center, Xingchen AGI Lab, China Telecom Artificial Intelligence Technology Co. Ltd
+        <span>中电信人工智能科技（北京）有限公司 · Beijing, China</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">Publications</span>
+      <span class="content">
+        <a href="https://scholar.google.com/citations?user=Bb9AKusAAAAJ&hl=en" target="_blank" rel="noopener" style="color:var(--primary-light);">Google Scholar Profile</a>
+        <span>Full publication list with citation metrics (370 citations · h-index 11 · i10-index 11)</span>
+      </span>
+    </li>
+    <li>
+      <span class="year">Email</span>
+      <span class="content">
+        <a href="mailto:lij86@chinatelecom.cn" style="color:var(--primary-light);">lij86@chinatelecom.cn</a>
+        <span>China Telecom corporate email (verified domain: chinatelecom.cn)</span>
+      </span>
+    </li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  Professional profile of Dr. Jie Li · Speech Technology R&amp;D Center · Xingchen AGI Lab, China Telecom Artificial Intelligence Technology Co. Ltd<br>
+  Last updated: September 2026 · This page is provided as part of the expression of interest for the
+  <a href="https://www.un.org/techenvoy" target="_blank" rel="noopener">UN Working Group on Open Compute</a>
+</footer>
+
+</body>
+</html>
